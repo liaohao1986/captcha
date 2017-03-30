@@ -181,14 +181,15 @@ public class ImagePreProcess2 {
     }
 
     public static void trainData() throws Exception {
-        File dir = new File("temp");
+//        File dir = new File("temp");
+        File dir = new ClassPathResource("temp").getFile();
         File[] files = dir.listFiles();
         for (File file : files) {
             BufferedImage img = removeBackgroud("temp\\" + file.getName());
             List<BufferedImage> listImg = splitImage(img);
             if (listImg.size() == 4) {
                 for (int j = 0; j < listImg.size(); ++j) {
-                    ImageIO.write(listImg.get(j), "JPG", new File("train2_2\\" + file.getName().charAt(j) + "-" + (index++) + ".jpg"));
+                    ImageIO.write(listImg.get(j), "JPG", new File("result\\train2\\" + file.getName().charAt(j) + "-" + (index++) + ".jpg"));
                 }
             }
         }
@@ -200,10 +201,10 @@ public class ImagePreProcess2 {
      */
     public static void main(String[] args) throws Exception {
         // downloadImage();
-        //      trainData();
-        for (int i = 0; i < 30; ++i) {
-            String text = getAllOcr("img2\\" + i + ".jpg");
-            System.out.println(i + ".jpg = " + text);
-        }
+              trainData();
+//        for (int i = 0; i < 30; ++i) {
+//            String text = getAllOcr("img2\\" + i + ".jpg");
+//            System.out.println(i + ".jpg = " + text);
+//        }
     }
 }
